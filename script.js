@@ -4,6 +4,7 @@
 $(function () {
   var timeBlockEl = $('.time-block');
   var eventInputEl = $('.description');
+  var taskTextEl = $("textarea");
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -12,30 +13,31 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
+  function saveTasksToStorage(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
   function handleEvent(event){
     event.preventDefault();
 
-    var eventText = eventInputEl.val();
-    var timeBlockVal = this.timeBlockEl.id;
+    var taskText = eventInputEl.val();
+    var timeBlockVal = this.div.id;
 
-    var workEvent = {
+    var newTask = {
       time: timeBlockVal,
-      task: eventText
+      task: taskText
 
     }
 
-    console.log(workEvent)
+    var tasks = renderTasks();
+    tasks.push(newTask);
+    saveTasksToStorage(tasks);
+
+    console.log(tasks)
   };
   
-  function saveEvent(){
-    var tasks = localStorage.getItem('tasks');
-    if (tasks) {
-      tasks = JSON.parse(tasks);
-    } else {
-      tasks = [];
-    }
-    return tasks;
-  };
+  //function saveEvent(){
+  //};
 
   timeBlockEl.on('click', '.save-btn', handleEvent);
 
@@ -54,9 +56,26 @@ $(function () {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   
-  function renderEvent(){
+  function renderTasks(){
+    var tasks = localStorage.getItem('tasks');
+    if (tasks) {
+      tasks = JSON.parse(tasks);
+    } else {
+      tasks = [];
+    }
+    return tasks;
     }
 
+  function displayTasks() {
+    for (var i = 0; i < tasks.length; i++) {
+      if (taskTextEl.id = tasks[i].time){
+        taskTextEl.text(tasks[i].task)
+      }
+
+    }
+  }
+
+  displayTasks();
 
   // TODO: Add code to display the current date in the header of the page.
   var today = dayjs().format('dddd MMMM D, YYYY');
