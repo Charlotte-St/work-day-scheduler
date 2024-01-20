@@ -16,10 +16,6 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
-  //function saveTasksToStorage(tasks) {
-    //localStorage.setItem('tasks', JSON.stringify(tasks));
-  //}
-
   function handleEvent(event){
     event.preventDefault();
 
@@ -32,18 +28,14 @@ $(function () {
 
     }
 
-    //var tasks = renderTasks();
+    console.log(newTask);
     tasks.push(newTask);
-    //saveTasksToStorage(tasks);
 
-    localStorage.setItem(timeBlockVal, JSON.stringify(newTask));
-
+    //localStorage.setItem(timeBlockVal, JSON.stringify(newTask));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
     console.log(tasks)
   };
   
-  //function saveEvent(){
-  //};
-
   saveButtonEl.on('click', handleEvent);
 
 
@@ -61,26 +53,33 @@ $(function () {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   
-  function renderTasks(){
-    var tasks = localStorage.getItem('tasks');
-    if (tasks) {
-      tasks = JSON.parse(tasks);
-    } else {
-      tasks = [];
-    }
-    return tasks;
-    }
-
-  //function displayTasks() {
-    //for (var i = 0; i < tasks.length; i++) {
-      //if (taskTextEl.id = tasks[i].time){
-        //taskTextEl.text(tasks[i].task)
-      //}
-
+  //function renderTasks(){
+    //var tasks = localStorage.getItem('tasks');
+    //if (tasks) {
+      //tasks = JSON.parse(tasks);
+    //} else {
+      //tasks = [];
     //}
- // }
+    //return tasks;
+    //}
 
-  //displayTasks();
+    //renderTasks();
+
+function displayTasks() {
+  var storedTasks = localStorage.getItem('tasks')
+  var savedTasks = JSON.parse(storedTasks);
+  console.log(savedTasks);
+    for (var i = 0; i < savedTasks.length; i++) {
+      console.log(savedTasks.length);
+      console.log(savedTasks[i]);
+      if (timeBlockEl.attr('id') === savedTasks[i].time){
+        $this.find(eventInputEl).val(savedTasks[i].task);
+    }
+
+    }
+ }
+
+  displayTasks();
 
   // TODO: Add code to display the current date in the header of the page.
   var today = dayjs().format('dddd MMMM D, YYYY');
