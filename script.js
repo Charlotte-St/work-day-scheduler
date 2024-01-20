@@ -4,7 +4,7 @@
 $(function () {
   var timeBlockEl = $('.time-block');
   var eventInputEl = $('.description');
-  var taskTextEl = $("textarea");
+  var taskTextEl = $('textarea');
   var saveButtonEl = $('.saveBtn');
 
   var tasks = [];
@@ -23,8 +23,8 @@ $(function () {
   function handleEvent(event){
     event.preventDefault();
 
-    var taskText = eventInputEl.val();
-    var timeBlockVal = timeBlockEl.attr('id');
+    var taskText = $(this).siblings('.description').val();
+    var timeBlockVal = $(this).parent().attr('id');
 
     var newTask = {
       time: timeBlockVal,
@@ -33,10 +33,10 @@ $(function () {
     }
 
     //var tasks = renderTasks();
-    //tasks.push(newTask);
+    tasks.push(newTask);
     //saveTasksToStorage(tasks);
 
-    localStorage.setItem(timeBlockVal,JSON.stringify(newTask));
+    localStorage.setItem(timeBlockVal, JSON.stringify(newTask));
 
     console.log(tasks)
   };
