@@ -53,11 +53,20 @@ $(function () {
       const taskTime = parseInt(blockTimeId.replace(/^\D+|\D+$$/g, ""));
       console.log((parseInt(blockTimeId.replace(/^\D+|\D+$$/g, ""))));
       console.log(currentTime);
-      console.log(typeof taskTime);
-      console.log(typeof currentTime);
-      $(this).addClass('past', taskTime < currentTime);
-      $(this).addClass('present', taskTime === currentTime);
-      $(this).addClass('future', taskTime > currentTime);
+      console.log(taskTime);
+      //console.log(typeof currentTime);
+      //$(this).addClass('past', taskTime < currentTime);
+      //$(this).addClass('present', taskTime === currentTime);
+      //$(this).addClass('future', taskTime > currentTime);
+
+      if (taskTime < currentTime){
+        $(this).addClass('past');
+      }
+      else if (taskTime === currentTime) {
+        $(this).addClass('present')
+      }
+      else {
+        $(this).addClass('future')}
     } )
 
   };
