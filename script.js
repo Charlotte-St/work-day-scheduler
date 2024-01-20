@@ -5,6 +5,9 @@ $(function () {
   var timeBlockEl = $('.time-block');
   var eventInputEl = $('.description');
   var taskTextEl = $("textarea");
+  var saveButtonEl = $('.saveBtn');
+
+  var tasks = [];
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -13,15 +16,15 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
-  function saveTasksToStorage(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
+  //function saveTasksToStorage(tasks) {
+    //localStorage.setItem('tasks', JSON.stringify(tasks));
+  //}
 
   function handleEvent(event){
     event.preventDefault();
 
     var taskText = eventInputEl.val();
-    var timeBlockVal = this.div.id;
+    var timeBlockVal = timeBlockEl.attr('id');
 
     var newTask = {
       time: timeBlockVal,
@@ -29,9 +32,11 @@ $(function () {
 
     }
 
-    var tasks = renderTasks();
-    tasks.push(newTask);
-    saveTasksToStorage(tasks);
+    //var tasks = renderTasks();
+    //tasks.push(newTask);
+    //saveTasksToStorage(tasks);
+
+    localStorage.setItem(timeBlockVal,JSON.stringify(newTask));
 
     console.log(tasks)
   };
@@ -39,7 +44,7 @@ $(function () {
   //function saveEvent(){
   //};
 
-  timeBlockEl.on('click', '.save-btn', handleEvent);
+  saveButtonEl.on('click', handleEvent);
 
 
   // TODO: Add code to apply the past, present, or future class to each time
@@ -48,9 +53,9 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
 
-  function timeClass (){
+  //function timeClass (){
 
-  };
+ // };
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
@@ -66,16 +71,16 @@ $(function () {
     return tasks;
     }
 
-  function displayTasks() {
-    for (var i = 0; i < tasks.length; i++) {
-      if (taskTextEl.id = tasks[i].time){
-        taskTextEl.text(tasks[i].task)
-      }
+  //function displayTasks() {
+    //for (var i = 0; i < tasks.length; i++) {
+      //if (taskTextEl.id = tasks[i].time){
+        //taskTextEl.text(tasks[i].task)
+      //}
 
-    }
-  }
+    //}
+ // }
 
-  displayTasks();
+  //displayTasks();
 
   // TODO: Add code to display the current date in the header of the page.
   var today = dayjs().format('dddd MMMM D, YYYY');
