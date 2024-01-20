@@ -9,6 +9,8 @@ $(function () {
 
   var tasks = [];
 
+  var currentTime = Number(dayjs().format('H'));
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -45,25 +47,26 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
 
-  //function timeClass (){
+  function timeClass (){
+    timeBlockEl.each(function() {
+      blockTimeId = this.id;
+      const taskTime = parseInt(blockTimeId.replace(/^\D+|\D+$$/g, ""));
+      console.log((parseInt(blockTimeId.replace(/^\D+|\D+$$/g, ""))));
+      console.log(currentTime);
+      console.log(typeof taskTime);
+      console.log(typeof currentTime);
+      $(this).addClass('past', taskTime < currentTime);
+      $(this).addClass('present', taskTime === currentTime);
+      $(this).addClass('future', taskTime > currentTime);
+    } )
 
- // };
+  };
 
+  timeClass();
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   
-  //function renderTasks(){
-    //var tasks = localStorage.getItem('tasks');
-    //if (tasks) {
-      //tasks = JSON.parse(tasks);
-    //} else {
-      //tasks = [];
-    //}
-    //return tasks;
-    //}
-
-    //renderTasks();
 
 function displayTasks() {
   var storedTasks = localStorage.getItem('tasks')
@@ -73,8 +76,13 @@ function displayTasks() {
       console.log(savedTasks.length);
       console.log(savedTasks[i]);
       if (timeBlockEl.attr('id') === savedTasks[i].time){
-        $this.find(eventInputEl).val(savedTasks[i].task);
+        //$this.find(eventInputEl).val(savedTasks[i].task);
+        console.log(true);
+        eventInputEl.val(savedTasks[i].task)
     }
+    console.log(timeBlockEl.attr('id'));
+    console.log(savedTasks[0].time);
+    console.log(savedTasks[1].time)
 
     }
  }
