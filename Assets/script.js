@@ -4,12 +4,8 @@
 $(function () {
     var timeBlockEl = $('.time-block');
     var eventInputEl = $('.description');
-    //var taskTextEl = $('textarea');
     var saveButtonEl = $('.saveBtn');
-  
-    var tasks = [];
-    //var newTask = {};
-  
+
     var currentTime = Number(dayjs().format('H'));
   
     // TODO: Add a listener for click events on the save button. This code should
@@ -19,19 +15,19 @@ $(function () {
     // time-block containing the button that was clicked? How might the id be
     // useful when saving the description in local storage?
 
-    function readTasksFromStorage() {
-        var tasks = localStorage.getItem('tasks');
-        if (tasks)  {
-            tasks = JSON.parse(tasks);
-        } else {
-            tasks = [];
-        }
-        return tasks;
-    }
+    //function readTasksFromStorage() {
+        //var tasks = localStorage.getItem('tasks');
+        //if (tasks)  {
+          //  tasks = JSON.parse(tasks);
+        //} else {
+          //  tasks = [];
+        //}
+      //  return tasks;
+    //}
   
-    function saveTaskstoStorage(tasks) {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+   // function saveTaskstoStorage(tasks) {
+     //   localStorage.setItem('tasks', JSON.stringify(tasks));
+    //}
 
     function handleEvent(event){
       event.preventDefault();
@@ -47,7 +43,7 @@ $(function () {
         localStorage.setItem(timeBlockVal, taskText)
       }
 
-      var tasks = readTasksFromStorage();
+      //var tasks = readTasksFromStorage();
   
       //console.log(newTask);
      //tasks.push(newTask);
@@ -55,7 +51,7 @@ $(function () {
       //saveTaskstoStorage(tasks);
   
       //localStorage.setItem(timeBlockVal, JSON.stringify(newTask));
-      localStorage.setItem('tasks', JSON.stringify(tasks));
+     // localStorage.setItem('tasks', JSON.stringify(tasks));
       //console.log(tasks)
     };
     
